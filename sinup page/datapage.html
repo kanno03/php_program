@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+</head>
+<body ng-app='myapp'>
+  <div ng-controller="userCtrl">
+    <h1 class="text-center text-uppercase" align="center">Fetch data from database using $http</h1>
+    <table border="1" align="center">
+      <tr align="center">
+        <th class="bg-primary text-white text-upparcase">Product Id</th>
+        <th>Product Name</th>
+        <th>Product Quantity</th>
+        <th>Product Price</th>
+        
+      </tr>
+      <!-- Display records -->
+      <tr ng-repeat="user in users">
+        <td>{{user.Product_id}}</td>
+        <td>{{user.Product_Name}}</td>
+        <td>{{user.Product_Quantity}}</td>
+        <td>{{user.Product_Price}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    var app = angular.module('myapp', []);
+
+    app.controller('userCtrl', function($scope, $http) {
+      $http.get("getdata.php")
+      .then(function (response) {
+        $scope.users = response.data;
+      });
+    });
+  </script>
+</body>
+</html>
+

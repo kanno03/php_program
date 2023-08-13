@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+</head>
+<body ng-app='myapp'>
+  <div ng-controller="userCtrl">
+    <h1 class="text-center text-uppercase" align="center">Fetch data from database using $http</h1>
+    <table border="1" align="center">
+      <tr align="center">
+        <th class="bg-primary text-white text-upparcase">id </th>
+            <th>NAME</th>
+        <th>AGE</th>
+        <th>gender</th>
+        <th> EMAIL</th>
+        <th> PHONE</th>
+        <th> other</th>
+        <th> date</th>
+
+      </tr>
+      <!-- Display records -->
+      <tr ng-repeat="user in users">
+        <td>{{user.sno}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.age}}</td>
+        <td>{{user.gender}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.phone}}</td>
+        <td>{{user.other}}</td>
+        <td>{{user.dt}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    var app = angular.module('myapp', []);
+
+    app.controller('userCtrl', function($scope, $http) {
+      $http.get("connection.php")
+      .then(function (response) {
+        $scope.users = response.data;
+      });
+    });
+  </script>
+</body>
+</html>
